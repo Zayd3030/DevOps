@@ -10,4 +10,10 @@ node {
         app = docker.build(dockerImage)
     }
 
+    stage('Test Docker image') {
+        app.inside {
+            sh 'echo "Docker Image Test Pass"'
+        }
+    }
+
 }
