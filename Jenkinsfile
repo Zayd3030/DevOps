@@ -21,4 +21,13 @@ node {
             app.push("latest")
         }
     }
+
+    stage('Deploy builds to Kubernetes') {
+        sshagent(['jenkins-ssh']) {
+            sh '''
+                ssh -T ubuntu@44.222.210.55 << 'EOF'
+                kubectl set image deployment/cw2-server cw2-server=zayd3030/cw2-server:latest
+            '''
+        }
+    }
 }
